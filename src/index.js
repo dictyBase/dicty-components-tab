@@ -23,28 +23,28 @@ const Content = (title, content) => {
 
 const tabs = [
     {
-        title: 'Tab 1',
+        title: 'Blast',
         element: (
             Content('Blast', 'Content Goes Here')
         ),
         link: 'blast'
     },
     {
-        title: 'Tab 2',
+        title: 'Protein',
         element: (
             <div style={ {height: 100, background: 'blue'} }></div>
         ),
         link: 'protein'
     },
     {
-        title: 'Tab 3',
+        title: 'Kek',
         element: (
             <div style={ {height: 100, background: 'green'} }></div>
         ),
         link: 'kek'
     },
     {
-        title: 'Tab 4',
+        title: 'Test',
         element: (
             <div style={ {height: 100, background: 'goldenrod'} }></div>
         ),
