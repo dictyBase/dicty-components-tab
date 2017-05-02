@@ -6,6 +6,6 @@ type Props = {
 }
 export default class Pane extends Component {
     render() {
-        return <div style={ {background: 'steelblue', height: 200} } />
+        return <div style={ {background: 'steelblue', height: 200} }>
     }
 }

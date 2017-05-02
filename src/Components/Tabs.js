@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import { Link as RouterLink, Route } from 'react-router-dom'
-import Pane from './Pane'
+import { Link as RouterLink, Route, Redirect, Switch } from 'react-router-dom'
+// import Pane from './Pane'
 import findWithProp from '../Utils/findWithProp'
 
 const Container = styled.div`
@@ -36,18 +36,20 @@ const Content = styled.div`
   border: 1px solid black;
   transition: height 0.3s ease;
   height: auto;
+  padding: 20px;
+  transition: height 0.3s ease;
 `
 type Props = {
 
 }
 type State = {
-    activeIndex: number
+    activeTab: ?string
 }
 export default class Tabs extends Component {
     constructor() {
         super()
         this.state = {
-            activeIndex: 0
+            activeTab: null
         }
     }
     changeTab = (i) => {
@@ -56,7 +58,6 @@ export default class Tabs extends Component {
         })
     }
     renderTabs = () => {
-        const { activeIndex } = this.state
         const { tabs, match } = this.props
         return tabs.map((tab, i) => {
             return (
@@ -64,27 +65,46 @@ export default class Tabs extends Component {
                 key={ i }
                 active={ match.params.name === tab.link ? true : false }
               >
-                <Link to={ tab.link } onClick={ () => { this.changeTab(i) }}>
+                <Link to={ `${match.url}/${tab.link}` }>
                   { tab.title }
                 </Link>
               </Tab>
             )
         })
     }
-    renderPane = () => {
-        const { activeIndex } = this.state
-        const { tabs, match } = this.props
-        console.log(match)
-        return findWithProp(tabs, 'link', match.params.name).element
+    renderPane = (props) => {
+        const { tabs } = this.props
+        const { match, history } = props
+        for (let i = 0; i < tabs.length; i++) {
+            if (tabs[i].link === match.params.tab) {
+                return tabs[i].element
+            }
+        }
+        history.push(tabs[0].link)
+        return tabs[0].element
+    }
+    fromTop = () => {
+        const { location, tabs } = this.props
+        const loc = location.pathname.split('/')[location.pathname.split('/').length - 1]
+        for (let i = 0; i < tabs.length; i++) {
+            if (loc === tabs[i].link) {
+                return true
+            }
+        }
+        return false
     }
     render() {
+        const { activeTab } = this.state
+        const { match, tabs, location } = this.props
+        console.log(location);
         return (
             <Container>
+              { !this.fromTop() && <Redirect from={ `gene/${match.params.id}` } exact to={ `${match.url}/${tabs[0].link}` } />}
               <TabBar>
                 { this.renderTabs() }
               </TabBar>
               <Content>
-                <Route path='/:id' render={ this.renderPane } />
+                <Route path={ `${match.url}/:tab` } component={ this.renderPane } />
               </Content>
             </Container>
         )
