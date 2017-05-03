@@ -26,26 +26,35 @@ const Tab = styled.div`
   align-items: center;
   ${''/* transform: ${ props => props.active ? 'scaleY(1.2)' : 'scaleY(1)' }; */}
   cursor: pointer;
-  background: ${ props => props.active ? props.theme.primary : props.theme.secondary };
+  background: ${
+    props => {
+        return props.active ?
+        props.theme.primary ? props.theme.primary : '#15317e'
+        : props.theme.secondary ? props.theme.secondary : '#A3BAE9'
+    }
+  };
   ${''/* box-shadow: ${ props => props.active ? '0px -3px 17px 0px rgba(50, 50, 50, 0.75)' : 'none' }; */}
   border-top: 1px solid black;
   border-right: 1px solid black;
   border-left: 1px solid black;
+  border-top-right-radius: 2px;
+  border-top-left-radius: 2px;
   ${''/* width: ${ props => props.active ? '110px' : '100px'}; */}
-  height: ${ props => props.active ? '50px' : '40px'};
+  height: ${ props => props.active ? '45px' : '35px'};
   margin-right: 2px;
   margin-top: 1px;
   transition: all 0.17s ease;
 
   &:hover {
-      ${ props => props.theme.active && `background${ props => props.theme.primary}` }
+    background: ${ props => !props.active && props.theme.secondary ? lighten(0.1, props.theme.secondary) : '#15317e' };
   }
 `
 const Link = styled(RouterLink)`
   height: 100%;
   width: 100%;
   display: flex;
-  padding: ${ props => props.active ? '0px 20px' : '0px 10px' };
+  padding: ${ props => props.active ? '10px 20px' : '10px 15px' };
+  /*padding: 10px 20px;*/
   transition: all 0.17s ease;
   justify-content: center;
   align-items: center;
@@ -54,7 +63,11 @@ const Link = styled(RouterLink)`
 `
 const Text = styled.p`
   display: block;
-  color: ${ props => props.theme.tabText };
+  color: ${
+    props => props.active
+      ? props.theme.tabText ? props.theme.tabText : 'white'
+      : props.theme.secondaryTabText ? props.theme.secondaryTabText : 'black'
+  };
 `
 const Content = styled.div`
   position: relative;
@@ -68,7 +81,7 @@ const Content = styled.div`
 
 const theme = {
     primary: '#15317e',
-    secondary: lighten(0.4, '#15317e'),
+    secondary: '#A3BAE9',
     tabText: 'white'
 }
 
@@ -94,7 +107,7 @@ export default class Tabs extends Component {
                 active={ active }
               >
                 <Link to={ `${match.url}/${tab.link}` } active={ active }>
-                  <Text>
+                  <Text active={ active }>
                     { tab.title }
                   </Text>
                 </Link>
@@ -128,11 +141,11 @@ export default class Tabs extends Component {
         return (
             <ThemeProvider theme={ theme }>
               <Container>
-                { !this.fromTop() && <Redirect from={ `gene/${match.params.id}` } exact to={ `${match.url}/${tabs[0].link}` } />}
+                { !this.fromTop() && <Redirect to={ `${match.url}/${tabs[0].link}` } /> }
                 <TabBar>
                   { this.renderTabs() }
                 </TabBar>
-                <Content>
+                <Content innerRef={ el => this.content = el }>
                   <Route path={ `${match.url}/:tab` } component={ this.renderPane } />
                 </Content>
               </Container>

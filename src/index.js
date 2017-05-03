@@ -25,7 +25,15 @@ const tabs = [
     {
         title: 'Blast',
         element: (
-            Content('Blast', 'Content Goes Here')
+            <div>
+              {
+                Content('Blast', 'Content Goes Here')
+              }
+
+              {
+                Content('Content 2', 'P1????????\nP2~~~~~~~~~~~~~\n\nP3!!!!!!!!!!!!!')
+              }
+            </div>
         ),
         link: 'blast'
     },
