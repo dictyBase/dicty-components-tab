@@ -2,7 +2,9 @@
   "name": "dicty-components-tab",
   "version": "0.1.0",
   "private": true,
+  "main": "lib/index.js",
   "dependencies": {
+    "dicty-components-navbar": "file:///Users/ced247/Desktop/dictybase/dicty-components-navbar",
     "dicty-components-panel": "file:///Users/ced247/Desktop/dictybase/dicty-components-panel",
     "polished": "^1.1.0",
     "react": "^15.5.4",

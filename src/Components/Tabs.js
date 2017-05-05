@@ -41,7 +41,7 @@ const Tab = styled.div`
   border-top-left-radius: 2px;
   ${''/* width: ${ props => props.active ? '110px' : '100px'}; */}
   height: ${ props => props.active ? '45px' : '35px'};
-  margin-right: 2px;
+  margin-right: 3px;
   margin-top: 1px;
   transition: all 0.17s ease;
 
@@ -92,9 +92,6 @@ type State = {
     activeTab: ?string
 }
 export default class Tabs extends Component {
-    constructor() {
-        super()
-    }
     renderTabs = () => {
         const { tabs, match } = this.props
         const { pathname } = this.props.location
