@@ -2,13 +2,19 @@ import React, { Component } from 'react'
 import styled, { ThemeProvider } from 'styled-components'
 import { lighten } from 'polished'
 import { Link as RouterLink, Route, Redirect, Switch } from 'react-router-dom'
-// import Pane from './Pane'
+import Pane from './Pane'
 import findWithProp from '../Utils/findWithProp'
 
 const Container = styled.div`
   padding: 20px;
   margin-top: 10px;
   position: relative;
+
+  @media (max-width: 768px) {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+  }
 `
 const TabBar = styled.div`
   position: absolute;
@@ -19,6 +25,14 @@ const TabBar = styled.div`
   ${''/* justify-content:  */}
   top: 20px;
   height: 50px;
+  overflow-x: scroll;
+
+  @media (max-width: 768px) {
+      position: initial;
+      display: flex;
+      ${''/* flex-direction: column; */}
+      max-width: 100%;
+  }
 `
 const Tab = styled.div`
   display: flex;
@@ -112,17 +126,6 @@ export default class Tabs extends Component {
             )
         })
     }
-    renderPane = (props) => {
-        const { tabs } = this.props
-        const { match, history } = props
-        for (let i = 0; i < tabs.length; i++) {
-            if (tabs[i].link === match.params.tab) {
-                return tabs[i].element
-            }
-        }
-        history.push(tabs[0].link)
-        return tabs[0].element
-    }
     fromTop = () => {
         const { location, tabs } = this.props
         const loc = location.pathname.split('/')[location.pathname.split('/').length - 1]
@@ -143,7 +146,7 @@ export default class Tabs extends Component {
                   { this.renderTabs() }
                 </TabBar>
                 <Content innerRef={ el => this.content = el }>
-                  <Route path={ `${match.url}/:tab` } component={ this.renderPane } />
+                  <Route path={ `${match.url}/:tab` } component={ (props) => <Pane { ...props } tabs={ tabs } /> } />
                 </Content>
               </Container>
             </ThemeProvider>
