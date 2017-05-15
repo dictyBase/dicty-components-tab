@@ -32,7 +32,6 @@ const TabBar = styled.div`
   @media (max-width: 768px) {
       position: initial;
       display: flex;
-      ${''/* flex-direction: column; */}
       max-width: 100%;
   }
 `
@@ -40,7 +39,6 @@ const Tab = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  ${''/* transform: ${ props => props.active ? 'scaleY(1.2)' : 'scaleY(1)' }; */}
   cursor: pointer;
   white-space: nowrap;
   background: ${
@@ -50,13 +48,11 @@ const Tab = styled.div`
         : props.theme.secondary ? props.theme.secondary : '#A3BAE9'
     }
   };
-  ${''/* box-shadow: ${ props => props.active ? '0px -3px 17px 0px rgba(50, 50, 50, 0.75)' : 'none' }; */}
   border-top: 1px solid black;
   border-right: 1px solid black;
   border-left: 1px solid black;
   border-top-right-radius: 2px;
   border-top-left-radius: 2px;
-  ${''/* width: ${ props => props.active ? '110px' : '100px'}; */}
   height: ${ props => props.active ? '45px' : '35px'};
   margin-right: 3px;
   margin-top: 1px;
