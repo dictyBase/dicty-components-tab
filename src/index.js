@@ -128,18 +128,53 @@ const tabs = [
         link: 'protein'
     },
     {
-        title: 'Kek',
+        title: 'Test 1',
         element: (
             <div style={ {height: 100, background: 'green'} }></div>
         ),
-        link: 'kek'
+        link: 'test1'
     },
     {
-        title: 'Test',
+        title: 'Test2',
         element: (
             <div style={ {height: 100, background: 'goldenrod'} }></div>
         ),
-        link: 'test'
+        link: 'test2'
+    },
+    {
+        title: 'Test3',
+        element: (
+            <div style={ {height: 100, background: 'goldenrod'} }></div>
+        ),
+        link: 'test3'
+    },
+    {
+        title: 'Test4',
+        element: (
+            <div style={ {height: 100, background: 'goldenrod'} }></div>
+        ),
+        link: 'test4'
+    },
+    {
+        title: 'Test5',
+        element: (
+            <div style={ {height: 100, background: 'goldenrod'} }></div>
+        ),
+        link: 'test5'
+    },
+    {
+        title: 'Test6',
+        element: (
+            <div style={ {height: 100, background: 'goldenrod'} }></div>
+        ),
+        link: 'test6'
+    },
+    {
+        title: 'Test7',
+        element: (
+            <div style={ {height: 100, background: 'goldenrod'} }></div>
+        ),
+        link: 'test7'
     }
 ]
 

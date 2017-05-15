@@ -12,8 +12,10 @@ const Container = styled.div`
 
   @media (max-width: 768px) {
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
       width: 100%;
+      padding: 0;
+      margin-top: 0px;
   }
 `
 const TabBar = styled.div`
@@ -40,6 +42,7 @@ const Tab = styled.div`
   align-items: center;
   ${''/* transform: ${ props => props.active ? 'scaleY(1.2)' : 'scaleY(1)' }; */}
   cursor: pointer;
+  white-space: nowrap;
   background: ${
     props => {
         return props.active ?
@@ -62,6 +65,12 @@ const Tab = styled.div`
   &:hover {
     background: ${ props => !props.active && props.theme.secondary ? lighten(0.1, props.theme.secondary) : '#15317e' };
   }
+
+  @media (max-width: 768px) {
+    margin-right: 0px;
+    border-left: none;
+    height: 45px;
+  }
 `
 const Link = styled(RouterLink)`
   height: 100%;
@@ -74,6 +83,10 @@ const Link = styled(RouterLink)`
   align-items: center;
   text-decoration: none;
   box-sizing: border-box;
+
+  @media (max-width: 768px) {
+    padding: 10px 15px;
+  }
 `
 const Text = styled.p`
   display: block;
@@ -91,6 +104,11 @@ const Content = styled.div`
   padding: 20px;
   margin-top: 50px;
   transition: height 0.3s ease;
+
+  @media (max-width: 768px) {
+    margin-top: 0px;
+    border-width: 1px 0px;
+  }
 `
 
 const theme = {
