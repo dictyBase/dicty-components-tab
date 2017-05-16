@@ -20,15 +20,17 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "enzyme": "^2.8.2",
+    "html-loader": "^0.4.5",
     "react-addons-test-utils": "^15.5.1",
     "react-scripts": "0.9.5",
-    "webpack": "^1.9.11",
+    "webpack": "^2.2.0",
     "webpack-dev-server": "^2.4.5"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "babel src --out-dir lib",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "demo": "webpack-dev-server --content-base ./examples --config ./examples/webpack.config.js"
   }
 }
