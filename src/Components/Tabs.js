@@ -3,7 +3,6 @@ import styled, { ThemeProvider } from 'styled-components'
 import { lighten } from 'polished'
 import { Link as RouterLink, Route, Redirect, Switch } from 'react-router-dom'
 import Pane from './Pane'
-import findWithProp from '../Utils/findWithProp'
 
 const Container = styled.div`
   padding: 20px;
@@ -15,7 +14,7 @@ const Container = styled.div`
       flex-direction: column;
       width: 100%;
       padding: 0;
-      margin-top: 0px;
+      margin-top: 10px;
   }
 `
 const TabBar = styled.div`
@@ -24,15 +23,16 @@ const TabBar = styled.div`
   flex-direction: row;
   flex-wrap: nowrap;
   align-items: flex-end;
-  ${''/* justify-content:  */}
   top: 20px;
   height: 50px;
   overflow-x: scroll;
 
   @media (max-width: 768px) {
+      height: 45px;
       position: initial;
       display: flex;
       max-width: 100%;
+      border-top: 1px solid black;
   }
 `
 const Tab = styled.div`
@@ -63,9 +63,75 @@ const Tab = styled.div`
   }
 
   @media (max-width: 768px) {
+    position: relative;
     margin-right: 0px;
     border-left: none;
     height: 45px;
+    border-radius: 0px;
+  }
+`
+const RightArrow = styled.div`
+  width: 25px;
+  height: 45px;
+  display: none;
+  position: absolute;
+  right: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1;
+  opacity: ${ props => props.visible ? 1 : 0 };
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+
+  &:after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    border-top: 7px solid transparent;
+    border-bottom: 7px solid transparent;
+    border-left: 7px solid white;
+    z-index: 2;
+  }
+
+  @media (max-width: 768px) {
+    display: block;
+  }
+`
+const LeftArrow = styled.div`
+  width: 25px;
+  height: 45px;
+  display: none;
+  position: absolute;
+  left: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1;
+  opacity: ${ props => props.visible ? 1 : 0 };
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+
+  &:after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    border-top: 7px solid transparent;
+    border-bottom: 7px solid transparent;
+    border-right: 7px solid white;
+    z-index: 2;
+  }
+
+  @media (max-width: 768px) {
+    display: block;
   }
 `
 const Link = styled(RouterLink)`
@@ -73,7 +139,6 @@ const Link = styled(RouterLink)`
   width: 100%;
   display: flex;
   padding: ${ props => props.active ? '10px 20px' : '10px 15px' };
-  /*padding: 10px 20px;*/
   transition: all 0.17s ease;
   justify-content: center;
   align-items: center;
@@ -114,12 +179,21 @@ const theme = {
 }
 
 type Props = {
-
+    tabs: Array<Object>
 }
 type State = {
-    activeTab: ?string
+    scrollPos: ?string
 }
 export default class Tabs extends Component {
+    constructor() {
+        super()
+        this.state = {
+            scrollPos: 'left'
+        }
+    }
+    componentDidMount() {
+        this.tabBar.addEventListener('scroll', this.handleScroll)
+    }
     renderTabs = () => {
         const { tabs, match } = this.props
         const { pathname } = this.props.location
@@ -150,14 +224,37 @@ export default class Tabs extends Component {
         }
         return false
     }
+    handleScroll = (e) => {
+        const { scrollPos } = this.state
+        const max = this.tabBar.scrollWidth - this.tabBar.clientWidth
+        if (e.target.scrollLeft < 15 && scrollPos != 'left') {
+            this.setState({
+                scrollPos: 'left'
+            })
+        } else if (e.target.scrollLeft > max - 15 && scrollPos != 'right') {
+            this.setState({
+                scrollPos: 'right'
+            })
+        } else if (e.target.scrollLeft > 15 && e.target.scrollLeft < max - 15) {
+            this.setState({
+                scrollPos: 'middle'
+            })
+        }
+    }
+    componentWillUnmount() {
+        this.tabBar.removeEventListener('scroll', this.handleScroll)
+    }
     render() {
         const { match, tabs, location } = this.props
+        const { scrollPos } = this.state
         return (
             <ThemeProvider theme={ theme }>
               <Container>
                 { !this.fromTop() && <Redirect to={ `${match.url}/${tabs[0].link}` } /> }
-                <TabBar>
+                <TabBar innerRef={ el => this.tabBar = el }>
+                  <LeftArrow visible={ scrollPos != 'left' ? true : false } pos="left" />
                   { this.renderTabs() }
+                  <RightArrow visible={ scrollPos != 'right' ? true : false } pos="right" />
                 </TabBar>
                 <Content innerRef={ el => this.content = el }>
                   <Route path={ `${match.url}/:tab` } component={ (props) => <Pane { ...props } tabs={ tabs } /> } />
