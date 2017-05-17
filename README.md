@@ -1,13 +1,16 @@
 # Tab Component
 A responsive, themable tab component integrated with [react-router-dom](https://github.com/ReactTraining/react-router/tree/master/packages/react-router-dom)
 
-##Demo
+## Demo
 
 ```bash
 npm run demo
 ```
 
 ## Desktop
+
+<img src="https://zippy.gfycat.com/OblongGoldenFlea.gif" />
+
 ## Mobile
 
 ## Usage
