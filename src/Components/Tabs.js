@@ -28,11 +28,17 @@ const TabBar = styled.div`
   overflow-x: scroll;
 
   @media (max-width: 768px) {
-      height: 45px;
+      height: auto;
       position: initial;
       display: flex;
       max-width: 100%;
-      border-top: 1px solid black;
+      ${''/* border-top: 1px solid black; */}
+      -ms-overflow-style: none;
+      overflow: -moz-scrollbars-none;
+      &::-webkit-scrollbar {
+        ${''/* width: 0 !important; */}
+        display: none;
+      }
   }
 `
 const Tab = styled.div`
@@ -193,6 +199,7 @@ export default class Tabs extends Component {
     }
     componentDidMount() {
         this.tabBar.addEventListener('scroll', this.handleScroll)
+        window.addEventListener('resize', this.handleResize)
     }
     renderTabs = () => {
         const { tabs, match } = this.props
@@ -241,20 +248,30 @@ export default class Tabs extends Component {
             })
         }
     }
+    handleResize = (e) => {
+        const { scrollPos } = this.state
+        if (this.tabBar.scrollWidth <= this.tabBar.clientWidth && scrollPos != 'none') {
+            console.log('kek');
+            this.setState({
+                scrollPos: 'none'
+            })
+        }
+    }
     componentWillUnmount() {
         this.tabBar.removeEventListener('scroll', this.handleScroll)
+        window.removeEventListener('resize', this.handleResize)
     }
     render() {
         const { match, tabs, location } = this.props
-        const { scrollPos } = this.state
+        let { scrollPos } = this.state
         return (
             <ThemeProvider theme={ theme }>
               <Container>
                 { !this.fromTop() && <Redirect to={ `${match.url}/${tabs[0].link}` } /> }
                 <TabBar innerRef={ el => this.tabBar = el }>
-                  <LeftArrow visible={ scrollPos != 'left' ? true : false } pos="left" />
+                  <LeftArrow visible={ scrollPos != 'left' && scrollPos != 'none' ? true : false } pos="left" />
                   { this.renderTabs() }
-                  <RightArrow visible={ scrollPos != 'right' ? true : false } pos="right" />
+                  <RightArrow visible={ scrollPos != 'right' && scrollPos != 'none' ? true : false } pos="right" />
                 </TabBar>
                 <Content innerRef={ el => this.content = el }>
                   <Route path={ `${match.url}/:tab` } component={ (props) => <Pane { ...props } tabs={ tabs } /> } />

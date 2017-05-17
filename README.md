@@ -44,7 +44,7 @@ The `Tabs` component accepts an array of objects which it uses to generate the t
             <Router>
               <div>
                 <Route exact path="/" component={ () => <Home /> } />
-              M{/* You must pass props from the Route to the Tabs component */}
+                {/* You must pass props from the Route to the Tabs component */}
                 <Route path="/gene/:id" component={ props => <Tabs { ...props } tabs={ tabs } /> } />
               </div>
             </Router>
