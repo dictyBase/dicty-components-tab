@@ -54,8 +54,6 @@ describe('Tabs', () => {
         ReactDOM.render(el, div)
     })
     it('should redirect to the first tab if it is accessed from its base path', () => {
-        console.log();
-        // console.log(wrapper.find(Tabs).props().location.pathname.includes(tabs[0].link));
         expect(wrapper.find(Tabs).props().location.pathname.includes(tabs[0].link)).toBe(true)
     })
     it('should push a new route when a tab is clicked', () => {
