@@ -4,8 +4,6 @@
   "private": true,
   "main": "lib/index.js",
   "dependencies": {
-    "dicty-components-navbar": "file:///Users/ced247/Desktop/dictybase/dicty-components-navbar",
-    "dicty-components-panel": "file:///Users/ced247/Desktop/dictybase/dicty-components-panel",
     "polished": "^1.1.0",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
@@ -19,6 +17,8 @@
     "babel-preset-flow": "^6.23.0",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
+    "dicty-components-navbar": "github:dictybase/dicty-components-navbar",
+    "dicty-components-panel": "github:dictybase/dicty-components-panel",
     "enzyme": "^2.8.2",
     "html-loader": "^0.4.5",
     "react-addons-test-utils": "^15.5.1",

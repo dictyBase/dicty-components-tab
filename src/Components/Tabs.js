@@ -9,11 +9,11 @@ const Container = styled.div`
   margin-top: 10px;
   position: relative;
 
-  @media (max-width: 768px) {
+  @media (max-width: 917px) {
       display: flex;
       flex-direction: column;
       width: 100%;
-      padding: 0;
+      padding: 20px 0px 0px 0px;
       margin-top: 10px;
   }
 `
@@ -27,18 +27,18 @@ const TabBar = styled.div`
   height: 50px;
   overflow-x: scroll;
 
-  @media (max-width: 768px) {
-      height: auto;
-      position: initial;
-      display: flex;
-      max-width: 100%;
-      ${''/* border-top: 1px solid black; */}
-      -ms-overflow-style: none;
-      overflow: -moz-scrollbars-none;
-      &::-webkit-scrollbar {
-        ${''/* width: 0 !important; */}
-        display: none;
-      }
+  @media (max-width: 917px) {
+    height: auto;
+    position: initial;
+    display: flex;
+    max-width: 100%;
+    ${''/* border-top: 1px solid black; */}
+    -ms-overflow-style: none;
+    overflow: -moz-scrollbars-none;
+    &::-webkit-scrollbar {
+      ${''/* width: 0 !important; */}
+      display: none;
+    }
   }
 `
 const Tab = styled.div`
@@ -68,12 +68,9 @@ const Tab = styled.div`
     background: ${ props => !props.active && props.theme.secondary ? lighten(0.1, props.theme.secondary) : '#15317e' };
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 917px) {
     position: relative;
-    margin-right: 0px;
-    border-left: none;
     height: 45px;
-    border-radius: 0px;
   }
 `
 const RightArrow = styled.div`
@@ -104,7 +101,7 @@ const RightArrow = styled.div`
     z-index: 2;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 917px) {
     display: block;
   }
 `
@@ -136,7 +133,7 @@ const LeftArrow = styled.div`
     z-index: 2;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 917px) {
     display: block;
   }
 `
@@ -151,7 +148,7 @@ const Link = styled(RouterLink)`
   text-decoration: none;
   box-sizing: border-box;
 
-  @media (max-width: 768px) {
+  @media (max-width: 917px) {
     padding: 10px 15px;
   }
 `
@@ -172,7 +169,7 @@ const Content = styled.div`
   margin-top: 50px;
   transition: height 0.3s ease;
 
-  @media (max-width: 768px) {
+  @media (max-width: 917px) {
     margin-top: 0px;
     border-width: 1px 0px;
   }
@@ -234,15 +231,15 @@ export default class Tabs extends Component {
     handleScroll = (e) => {
         const { scrollPos } = this.state
         const max = this.tabBar.scrollWidth - this.tabBar.clientWidth
-        if (e.target.scrollLeft < 15 && scrollPos != 'left') {
+        if (this.tabBar.scrollLeft < 15 && scrollPos != 'left') {
             this.setState({
                 scrollPos: 'left'
             })
-        } else if (e.target.scrollLeft > max - 15 && scrollPos != 'right') {
+        } else if (this.tabBar.scrollLeft > max - 15 && scrollPos != 'right') {
             this.setState({
                 scrollPos: 'right'
             })
-        } else if (e.target.scrollLeft > 15 && e.target.scrollLeft < max - 15) {
+        } else if (this.tabBar.scrollLeft > 15 && this.tabBar.scrollLeft < max - 15) {
             this.setState({
                 scrollPos: 'middle'
             })
@@ -255,6 +252,8 @@ export default class Tabs extends Component {
             this.setState({
                 scrollPos: 'none'
             })
+        } else if (scrollPos != 'none') {
+            this.handleScroll()
         }
     }
     componentWillUnmount() {

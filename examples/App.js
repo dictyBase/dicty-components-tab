@@ -109,70 +109,56 @@ const Content = (title, content) => {
 
 const tabs = [
     {
-        title: 'Blast',
+        title: 'Gene Summary',
         element: (
             <div>
               { Content('Blast', 'Content Goes Here') }
               { Content('Content 2', 'P1????????\nP2~~~~~~~~~~~~~\n\nP3!!!!!!!!!!!!!') }
             </div>
         ),
-        link: 'blast'
+        link: 'summary'
     },
     {
-        title: 'Protein',
+        title: 'Protein Information',
         element: (
             <div style={ {height: 100, background: 'blue'} }></div>
         ),
-        link: 'protein'
+        link: 'proteininformation'
     },
     {
-        title: 'Test 1',
+        title: 'Gene Ontology',
         element: (
             <div style={ {height: 100, background: 'green'} }></div>
         ),
-        link: 'test1'
+        link: 'ontology'
     },
     {
-        title: 'Test2',
+        title: 'Orthologs',
         element: (
             <div style={ {height: 100, background: 'goldenrod'} }></div>
         ),
-        link: 'test2'
+        link: 'orthologs'
     },
     {
-        title: 'Test3',
+        title: 'Phenotypes',
         element: (
             <div style={ {height: 100, background: 'goldenrod'} }></div>
         ),
-        link: 'test3'
+        link: 'phenotypes'
     },
     {
-        title: 'Test4',
+        title: 'Reference',
         element: (
             <div style={ {height: 100, background: 'goldenrod'} }></div>
         ),
-        link: 'test4'
+        link: 'reference'
     },
     {
-        title: 'Test5',
+        title: 'BLAST',
         element: (
             <div style={ {height: 100, background: 'goldenrod'} }></div>
         ),
-        link: 'test5'
-    },
-    {
-        title: 'Test6',
-        element: (
-            <div style={ {height: 100, background: 'goldenrod'} }></div>
-        ),
-        link: 'test6'
-    },
-    {
-        title: 'Test7',
-        element: (
-            <div style={ {height: 100, background: 'goldenrod'} }></div>
-        ),
-        link: 'test7'
+        link: 'blast'
     }
 ]
 
