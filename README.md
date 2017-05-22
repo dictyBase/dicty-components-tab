@@ -1,3 +1,7 @@
+[![Build Status](https://travis-ci.org/dictyBase/dicty-components-tab.svg?branch=master)](https://travis-ci.org/dictyBase/dicty-components-tab)
+[![Dependency Status](https://david-dm.org/dictybase/dicty-components-tab.svg)](https://david-dm.org/dictybase/dicty-components-tab)
+[![Dev Dependency Status](https://david-dm.org/dictybase/dicty-components-tab/dev-status.svg)](https://david-dm.org/dictybase/dicty-components-tab?type=dev)
+
 # Tab Component
 A responsive, themable tab component integrated with [react-router-dom](https://github.com/ReactTraining/react-router/tree/master/packages/react-router-dom)
 
