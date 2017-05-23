@@ -42,9 +42,9 @@ module.exports = {
     ]
   },
   devServer: {
-    port: 8080,
+    port: 3000,
     historyApiFallback: {
-      index: path.resolve(__dirname, 'build/index.html')
+      index: 'index.html'
     }
   }
 }
