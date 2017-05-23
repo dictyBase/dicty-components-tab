@@ -4,6 +4,7 @@
   "private": true,
   "main": "lib/index.js",
   "dependencies": {
+    "dicty-components-navbar": "git://github.com/dictybase/dicty-components-navbar.git",
     "polished": "^1.1.0",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",

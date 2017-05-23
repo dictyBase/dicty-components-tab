@@ -1,3 +1,4 @@
+// @flow
 import React, { Component } from 'react'
 import styled, { ThemeProvider } from 'styled-components'
 import { lighten } from 'polished'
@@ -188,6 +189,11 @@ type State = {
     scrollPos: ?string
 }
 export default class Tabs extends Component {
+    content: any
+    tabBar: any
+    props: Props
+    state: State
+    
     constructor() {
         super()
         this.state = {
@@ -198,7 +204,7 @@ export default class Tabs extends Component {
         this.tabBar.addEventListener('scroll', this.handleScroll)
         window.addEventListener('resize', this.handleResize)
     }
-    renderTabs = () => {
+    renderTabs = (): ?React$Element<any> => {
         const { tabs, match } = this.props
         const { pathname } = this.props.location
         const loc = pathname.split('/')[pathname.split('/').length - 1]
@@ -218,7 +224,7 @@ export default class Tabs extends Component {
             )
         })
     }
-    fromTop = () => {
+    fromTop = (): void => {
         const { location, tabs } = this.props
         const loc = location.pathname.split('/')[location.pathname.split('/').length - 1]
         for (let i = 0; i < tabs.length; i++) {
@@ -228,7 +234,7 @@ export default class Tabs extends Component {
         }
         return false
     }
-    handleScroll = (e) => {
+    handleScroll = (e: Event): void => {
         const { scrollPos } = this.state
         const max = this.tabBar.scrollWidth - this.tabBar.clientWidth
         if (this.tabBar.scrollLeft < 15 && scrollPos != 'left') {
@@ -245,7 +251,7 @@ export default class Tabs extends Component {
             })
         }
     }
-    handleResize = (e) => {
+    handleResize = (e: Event): void => {
         const { scrollPos } = this.state
         if (this.tabBar.scrollWidth <= this.tabBar.clientWidth && scrollPos != 'none') {
             console.log('kek');
