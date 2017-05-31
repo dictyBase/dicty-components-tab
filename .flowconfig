@@ -1,0 +1,10 @@
+[ignore]
+.*node_modules.*
+.*/__tests__/.*
+
+[include]
+flow-typed
+
+[libs]
+
+[options]

@@ -183,17 +183,20 @@ const theme = {
 }
 
 type Props = {
-    tabs: Array<Object>
+    tabs: Array<Object>,
+    location: Object,
+    match: Object
 }
 type State = {
     scrollPos: ?string
 }
 export default class Tabs extends Component {
+    displayName = 'Tabs'
     content: any
     tabBar: any
     props: Props
     state: State
-    
+
     constructor() {
         super()
         this.state = {
@@ -204,7 +207,7 @@ export default class Tabs extends Component {
         this.tabBar.addEventListener('scroll', this.handleScroll)
         window.addEventListener('resize', this.handleResize)
     }
-    renderTabs = (): ?React$Element<any> => {
+    renderTabs = (): Array<?React$Element<any>> => {
         const { tabs, match } = this.props
         const { pathname } = this.props.location
         const loc = pathname.split('/')[pathname.split('/').length - 1]
@@ -224,7 +227,7 @@ export default class Tabs extends Component {
             )
         })
     }
-    fromTop = (): void => {
+    fromTop = (): boolean => {
         const { location, tabs } = this.props
         const loc = location.pathname.split('/')[location.pathname.split('/').length - 1]
         for (let i = 0; i < tabs.length; i++) {
@@ -234,7 +237,7 @@ export default class Tabs extends Component {
         }
         return false
     }
-    handleScroll = (e: Event): void => {
+    handleScroll = (): void => {
         const { scrollPos } = this.state
         const max = this.tabBar.scrollWidth - this.tabBar.clientWidth
         if (this.tabBar.scrollLeft < 15 && scrollPos != 'left') {

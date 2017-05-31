@@ -21,6 +21,7 @@
     "dicty-components-navbar": "github:dictybase/dicty-components-navbar",
     "dicty-components-panel": "github:dictybase/dicty-components-panel",
     "enzyme": "^2.8.2",
+    "flow-bin": "^0.47.0",
     "html-loader": "^0.4.5",
     "react-addons-test-utils": "^15.5.1",
     "react-scripts": "0.9.5",
@@ -32,6 +33,7 @@
     "build": "babel src --out-dir lib",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "demo": "webpack-dev-server --content-base ./examples --config ./examples/webpack.config.js"
+    "demo": "webpack-dev-server --content-base ./examples --config ./examples/webpack.config.js",
+    "flow": "flow"
   }
 }
