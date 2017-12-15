@@ -23,7 +23,7 @@ The `Tabs` component accepts an array of objects which it uses to generate the t
 
 ```jsx
     import { BrowserRouter as Router, Route } from 'react-router-dom'
-    import { Tabs } from 'dicty-components-tab'
+    import Tabs from 'dicty-components-tab'
 
     const tabs = [
         {
