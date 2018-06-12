@@ -4,7 +4,6 @@
   "private": true,
   "main": "lib/index.js",
   "dependencies": {
-    "dicty-components-navbar": "git://github.com/dictybase/dicty-components-navbar.git",
     "polished": "^1.1.0",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
@@ -18,7 +17,6 @@
     "babel-preset-flow": "^6.23.0",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
-    "dicty-components-navbar": "github:dictybase/dicty-components-navbar",
     "dicty-components-panel": "github:dictybase/dicty-components-panel",
     "enzyme": "^2.8.2",
     "flow-bin": "^0.47.0",
