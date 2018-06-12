@@ -196,12 +196,9 @@ type Props = {
 type State = {
   scrollPos: ?string,
 }
-export default class Tabs extends Component {
-  displayName = "Tabs"
+export default class Tabs extends Component<Props, State> {
   content: any
   tabBar: any
-  props: Props
-  state: State
 
   constructor() {
     super()
